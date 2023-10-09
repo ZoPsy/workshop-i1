@@ -1,11 +1,21 @@
 FROM node:18
 
-WORKDIR /app
+# Create app directory
+WORKDIR /usr/src/app
 
-COPY package.json .
+# Install app dependencies
+COPY package*.json ./
 
 RUN npm install
 
+# Bundle app source
 COPY . .
 
-CMD [ "node", "build/index.js" ]
+# Build app
+RUN npm run build
+
+# Expose port
+EXPOSE 3000
+
+# Start app
+CMD [ "node", "build/" ]
