@@ -13,6 +13,7 @@
 
 	function init() {
 		html5Qrcode = new Html5Qrcode('reader');
+		alert('reader')
 	}
 
 	function start() {
