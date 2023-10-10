@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Scanner from '$lib/components/Scanner.svelte';
 	import type { PageData } from './$types';
 
@@ -26,11 +27,15 @@
 
 			if (etablissement !== data.etablissement) {
 				errorText = 'Etablissement non correcte';
+				return;
 			}
 
 			if (question != data.question_id) {
 				errorText = 'Pas la bonne question';
+				return;
 			}
+
+			goto(codeUrl);
 		}
 	};
 </script>
