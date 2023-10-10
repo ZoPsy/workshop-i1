@@ -8,8 +8,8 @@
 
 	const pattern: RegExp = /https:\/\/workshop-i1-production\.up\.railway\.app\/(\w+)\/(\w+)/;
 
-	function handleCode(event) {
-		checkCorrectUrl(event.detail.code)
+	function handleCode(event: { detail: { code: string } }) {
+		checkCorrectUrl(event.detail.code);
 	}
 
 	const checkCorrectUrl = (codeUrl: string) => {
@@ -26,7 +26,7 @@
 	};
 </script>
 
-<Scanner on:code={handleCode}/>
+<Scanner on:code={handleCode} />
 {#if errorText}
 	<p class="text-red-500">{errorText}</p>
 {/if}
