@@ -7,8 +7,6 @@
 
 	let errorText: string;
 
-	const pattern: RegExp = /https:\/\/\w+\.\w+\.railway\.app\/(\w+)\/(\d+)/;
-
 	function handleCode(event: { detail: { code: string } }) {
 		const code = event.detail.code;
 		checkCorrectUrl(code);
@@ -22,7 +20,6 @@
 		const etablissement: string = lastTwoItems[0];
 		const question: number = parseInt(lastTwoItems[1], 10);
 
-		alert(etablissement + ' ' + question);
 
 		if (etablissement !== data.etablissement) {
 			errorText = 'Etablissement non correcte';
