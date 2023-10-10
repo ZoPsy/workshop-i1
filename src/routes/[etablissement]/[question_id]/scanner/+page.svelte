@@ -9,6 +9,8 @@
 	const pattern: RegExp = /https:\/\/workshop-i1-production\.up\.railway\.app\/(\w+)\/(\w+)/;
 
 	function handleCode(event: { detail: { code: string } }) {
+		const code = event.detail.code;
+		alert(code)
 		checkCorrectUrl(event.detail.code);
 	}
 
