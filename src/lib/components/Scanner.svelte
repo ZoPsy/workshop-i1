@@ -1,7 +1,10 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { Html5Qrcode } from 'html5-qrcode';
 	import { onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
 	let scanning = false;
 
 	let html5Qrcode: Html5Qrcode;
@@ -16,7 +19,7 @@
 		html5Qrcode.start(
 			{ facingMode: 'environment' },
 			{
-				fps: 10,
+				fps: 60,
 				qrbox: { width: 250, height: 250 }
 			},
 			onScanSuccess,
@@ -31,8 +34,10 @@
 	}
 
 	function onScanSuccess(decodedText: any, decodedResult: any) {
-		goto(decodedText);
 		console.log(decodedResult);
+		dispatch('code', {
+			code: decodedText
+		})
 	}
 
 	function onScanFailure(error: any) {
