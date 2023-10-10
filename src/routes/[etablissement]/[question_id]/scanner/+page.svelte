@@ -11,36 +11,33 @@
 
 	function handleCode(event: { detail: { code: string } }) {
 		const code = event.detail.code;
-		alert(code)
 		checkCorrectUrl(code);
 	}
 
 	const checkCorrectUrl = (codeUrl: string) => {
-		const match = codeUrl.match(pattern);
+		const parts: string[] = codeUrl.split('/');
 
-		if (match) {
-			alert("match")
-			
-			const etablissement: string = match[1];
-			const question: number = parseInt(match[2], 10);
+		const lastTwoItems: string[] = parts.slice(-2);
 
-			alert(etablissement + " " + question)
+		const etablissement: string = lastTwoItems[0];
+		const question: number = parseInt(lastTwoItems[1], 10);
 
-			if (etablissement !== data.etablissement) {
-				errorText = 'Etablissement non correcte';
-				return;
-			}
+		alert(etablissement + ' ' + question);
 
-			if (question != data.question_id) {
-				errorText = 'Pas la bonne question';
-				return;
-			}
-
-			goto(codeUrl);
+		if (etablissement !== data.etablissement) {
+			errorText = 'Etablissement non correcte';
+			return;
 		}
+
+		if (question != data.question_id) {
+			errorText = 'Pas la bonne question';
+			return;
+		}
+
+		goto(codeUrl);
 	};
 </script>
 
-Trouve le qr code suivant, indice :  kinder countryy
+Trouve le qr code suivant, indice : kinder countryy
 <Scanner on:code={handleCode} />
 {errorText}
