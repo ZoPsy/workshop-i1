@@ -5,6 +5,7 @@ CREATE TABLE establishment (
 CREATE TABLE questions (
     question_id SERIAL PRIMARY KEY,
     question_text TEXT,
+    number TEXT,
     explanation TEXT,
     enigme TEXT,
     establishment_id INT,
