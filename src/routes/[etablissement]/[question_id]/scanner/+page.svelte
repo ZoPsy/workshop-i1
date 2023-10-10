@@ -1,5 +1,8 @@
 <script lang="ts">
-    import type { PageData } from './$types';
-    
-    export let data: PageData;
+	import Scanner from '$lib/components/Scanner.svelte';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
+
+<Scanner />
