@@ -20,7 +20,6 @@
 		const etablissement: string = lastTwoItems[0];
 		const question: number = parseInt(lastTwoItems[1], 10);
 
-
 		if (etablissement !== data.etablissement) {
 			errorText = 'Etablissement non correcte';
 			return;
@@ -35,6 +34,7 @@
 	};
 </script>
 
-Trouve le qr code suivant, indice : kinder countryy
-<Scanner on:code={handleCode} />
-{errorText}
+<div class="h-screen w-screen relative">
+	<div class="absolute bottom-2">{errorText}</div>
+	<Scanner on:code={handleCode} />
+</div>

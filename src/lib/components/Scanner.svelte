@@ -37,7 +37,7 @@
 		console.log(decodedResult);
 		dispatch('code', {
 			code: decodedText
-		})
+		});
 	}
 
 	function onScanFailure(error: any) {
@@ -45,26 +45,17 @@
 	}
 </script>
 
-<main>
-	<reader id="reader" />
+<main class="h-screen w-screen">
+	<reader class="flex h-screen w-screen" id="reader" />
 	{#if scanning}
-		<button on:click={stop}>stop</button>
+		<button class="absolute bottom-8 left-8" on:click={stop}>stop</button>
 	{:else}
-		<button on:click={start}>start</button>
+		<button class="absolute bottom-8 left-8" on:click={start}>start</button>
 	{/if}
 </main>
 
 <style>
-	main {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 20px;
-	}
-	reader {
-		width: 100%;
-		min-height: 500px;
-		background-color: black;
+	#reader > video {
+		height: 100svh;
 	}
 </style>
