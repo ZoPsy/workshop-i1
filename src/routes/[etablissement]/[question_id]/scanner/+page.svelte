@@ -19,11 +19,12 @@
 		const match = codeUrl.match(pattern);
 
 		if (match) {
-			console.log("match")
+			alert("match")
+			
 			const etablissement: string = match[1];
 			const question: number = parseInt(match[2], 10);
 
-			console.log(etablissement, question)
+			alert(etablissement + " " + question)
 
 			if (etablissement !== data.etablissement) {
 				errorText = 'Etablissement non correcte';
@@ -40,6 +41,6 @@
 	};
 </script>
 
-Trouve le qr code suivant, indice :  kinder country
+Trouve le qr code suivant, indice :  kinder countryy
 <Scanner on:code={handleCode} />
 {errorText}
