@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation';
 	import { Html5Qrcode } from 'html5-qrcode';
 	import { onMount } from 'svelte';
-	import { PUBLIC_BASE_URL } from '$env/static/public';
 	let scanning = false;
 
 	let html5Qrcode: Html5Qrcode;
