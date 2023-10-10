@@ -10,6 +10,7 @@
 
 	function handleCode(event: { detail: { code: string } }) {
 		const code = event.detail.code;
+		alert(code)
 		checkCorrectUrl(code);
 	}
 

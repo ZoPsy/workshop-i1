@@ -13,7 +13,6 @@
 
 	function init() {
 		html5Qrcode = new Html5Qrcode('reader');
-		alert('reader')
 	}
 
 	function start() {
@@ -36,10 +35,8 @@
 
 	function onScanSuccess(decodedText: any, decodedResult: any) {
 		console.log(decodedResult);
-		alert(decodedResult);
-		alert(decodedText);
 		dispatch('code', {
-			code: decodedResult
+			code: decodedText
 		})
 	}
 
