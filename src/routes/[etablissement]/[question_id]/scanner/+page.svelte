@@ -17,22 +17,22 @@
 		const match = codeUrl.match(pattern);
 
 		if (match) {
+			console.log("match")
 			const etablissement: string = match[1];
 			const question: number = parseInt(match[2], 10);
 
+			console.log(etablissement, question)
+
 			if (etablissement !== data.etablissement) {
 				errorText = 'Etablissement non correcte';
-				alert('mauvais etablissement');
 			}
 
 			if (question != data.question_id) {
-				alert('question not next');
+				errorText = 'Pas la bonne question';
 			}
 		}
 	};
 </script>
 
 <Scanner on:code={handleCode} />
-{#if errorText}
-	<p class="text-red-500">{errorText}</p>
-{/if}
+{errorText}
