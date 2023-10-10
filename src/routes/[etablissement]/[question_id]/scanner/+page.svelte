@@ -35,5 +35,6 @@
 	};
 </script>
 
+Trouve le qr code suivant, indice :  kinder country
 <Scanner on:code={handleCode} />
 {errorText}
