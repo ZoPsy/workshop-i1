@@ -18,4 +18,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Start app
-CMD [ "node", "build/" ]
+CMD [ "node", "build/index.js" ]
