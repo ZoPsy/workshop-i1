@@ -26,7 +26,7 @@
 	};
 </script>
 
-<Scanner on:code={}/>
+<Scanner on:code={handleCode}/>
 {#if errorText}
 	<p class="text-red-500">{errorText}</p>
 {/if}
