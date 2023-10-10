@@ -35,6 +35,8 @@
 
 	function onScanSuccess(decodedText: any, decodedResult: any) {
 		console.log(decodedResult);
+		alert(decodedResult);
+		alert(decodedText);
 		dispatch('code', {
 			code: decodedResult
 		})
