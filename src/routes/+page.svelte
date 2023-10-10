@@ -1,7 +1,5 @@
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+<script>
+	import Scanner from '$lib/components/Scanner.svelte';
+</script>
 
-<style lang="postcss">
-	:global(html) {
-		background-color: theme(colors.red.500);
-	}
-</style>
+<Scanner />

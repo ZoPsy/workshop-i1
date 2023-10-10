@@ -1,34 +1,66 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { Html5Qrcode, Html5QrcodeScanner } from 'html5-qrcode';
+	import { goto } from '$app/navigation';
+	import { Html5Qrcode } from 'html5-qrcode';
+	import { onMount } from 'svelte';
+	import { PUBLIC_BASE_URL } from '$env/static/public';
+	let scanning = false;
 
-	let qrCodeScanner: Html5Qrcode;
+	let html5Qrcode: Html5Qrcode;
+
+	onMount(init);
+
+	function init() {
+		html5Qrcode = new Html5Qrcode('reader');
+	}
+
+	function start() {
+		html5Qrcode.start(
+			{ facingMode: 'environment' },
+			{
+				fps: 10,
+				qrbox: { width: 250, height: 250 }
+			},
+			onScanSuccess,
+			onScanFailure
+		);
+		scanning = true;
+	}
+
+	async function stop() {
+		await html5Qrcode.stop();
+		scanning = false;
+	}
 
 	function onScanSuccess(decodedText: any, decodedResult: any) {
-		// handle the scanned code as you like, for example:
-		console.log(`Code matched = ${decodedText}`, decodedResult);
+		goto(decodedText);
+		console.log(decodedResult);
 	}
 
 	function onScanFailure(error: any) {
-		// handle scan failure, usually better to ignore and keep scanning.
-		// for example:
 		console.warn(`Code scan error = ${error}`);
 	}
-
-	let html5QrcodeScanner = new Html5QrcodeScanner(
-		'reader',
-		{ fps: 10, qrbox: { width: 250, height: 250 } },
-		/* verbose= */ false
-	);
-	onMount(() => {
-		html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-	});
-
-	onDestroy(() => {
-		if (qrCodeScanner) {
-			qrCodeScanner.stop();
-		}
-	});
 </script>
 
-<div id="reader" class=" w-3/4" />
+<main>
+	<reader id="reader" />
+	{#if scanning}
+		<button on:click={stop}>stop</button>
+	{:else}
+		<button on:click={start}>start</button>
+	{/if}
+</main>
+
+<style>
+	main {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 20px;
+	}
+	reader {
+		width: 100%;
+		min-height: 500px;
+		background-color: black;
+	}
+</style>
