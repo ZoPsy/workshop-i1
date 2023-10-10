@@ -1,19 +1,19 @@
 <script lang="ts">
 	import Scanner from '$lib/components/Scanner.svelte';
+
+	const etablissement = '1';
+
+	export { etablissement };
 </script>
 
-<div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-5">
-		<h1 class="h1">Let's get cracking bones!</h1>
-		<p>Start by exploring:</p>
-		<ul>
-			<li><code class="code">/src/routes/+layout.svelte</code> - barebones layout</li>
-			<li><code class="code">/src/app.postcss</code> - app wide css</li>
-			<li>
-				<code class="code">/src/routes/+page.svelte</code> - this page, you can replace the contents
-			</li>
-		</ul>
+<div class="main-container">
+	<div class="content-container">
+		<h1 class="h2">Let's get cracking bones!</h1>
+		<form class="card p-6 rounded-lg flex flex-col gap-8" action="" method="post">
+			<label class="label">
+				<input class="input" type="text" placeholder="Entre le nom de ton entreprise" />
+			</label>
+			<button type="button" class="btn variant-filled">Confirmer</button>
+		</form>
 	</div>
 </div>
-
-<Scanner />
