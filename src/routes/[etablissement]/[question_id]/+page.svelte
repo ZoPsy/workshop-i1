@@ -1,5 +1,45 @@
 <script lang="ts">
-    import type { PageData } from './$types';
-    
-    export let data: PageData;
+	import { slide } from 'svelte/transition';
+	import type { PageData } from './$types';
+
+	const scenario = 1;
+	let isIntro = true;
+
+	//export let data: PageData;
+	export { isIntro };
 </script>
+
+<div class="main-container">
+	{#if isIntro}
+		<div class="content-container">
+			<div class="flex flex-col gap-10">
+				<span>Scénario N°1 sur 4</span>
+				<span>Titre</span>
+				<div class="card p-4">
+					<p>
+						Lorem ipsum dolor sit amet consectetur. Amet nec malesuada mi suspendisse sapien
+						elementum vulputate. Vel auctor nulla nulla magna nisl sem non egestas. Nunc ac dui est
+						ornare. Vitae mi eleifend morbi vitae nulla pharetra.
+					</p>
+				</div>
+				<button on:click={() => (isIntro = false)} type="button" class="btn variant-filled"
+					>Continuer</button
+				>
+			</div>
+		</div>
+	{:else}
+		<div in:slide={{ duration: 300, axis: 'x' }} class="content-container">
+			<div class="flex flex-col gap-10">
+				<span>Scénario N°1 sur 4</span>
+				<span>Question</span>
+				<div class="flex flex-col gap-5">
+					<button type="button" class="btn variant-ghost">Réponse 1</button>
+					<button type="button" class="btn variant-ghost">Réponse 2</button>
+					<button type="button" class="btn variant-ghost">Réponse 3</button>
+					<button type="button" class="btn variant-ghost">Réponse 4</button>
+				</div>
+				<button type="button" class="btn variant-filled">Continuer</button>
+			</div>
+		</div>
+	{/if}
+</div>
