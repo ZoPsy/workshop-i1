@@ -22,14 +22,16 @@
 		// Optional: A list of footer labels.
 	};
 
-	export { tableSimple, Table };
+	let data: PageData;
+
+	export { tableSimple, Table, data };
 </script>
 
 <div class="main-container">
 	<div class="content-container">
 		<h1 class="h2">Leaderboard</h1>
 		<div class="flex flex-col gap-5">
-			<a href="/epsi" type="button" class="btn variant-ghost">Retour</a>
+			<a href="/{data.etablissement}" type="button" class="btn variant-ghost">Retour</a>
 			<Table source={tableSimple} />
 		</div>
 	</div>

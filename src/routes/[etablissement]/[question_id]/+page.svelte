@@ -6,14 +6,15 @@
 	let isIntro = true;
 
 	//export let data: PageData;
-	export { isIntro };
+	let data: PageData;
+	export { isIntro, data };
 </script>
 
 <div class="main-container">
 	{#if isIntro}
 		<div class="content-container">
-			<div class="flex flex-col gap-10">
-				<span>Scénario N°1 sur 4</span>
+			<div class="flex flex-col gap-10 items-center">
+				<span>Scénario N°{data.question_id} sur 4</span>
 				<span>Titre</span>
 				<div class="card p-4">
 					<p>
@@ -29,16 +30,21 @@
 		</div>
 	{:else}
 		<div in:slide={{ duration: 300, axis: 'x' }} class="content-container">
-			<div class="flex flex-col gap-10">
-				<span>Scénario N°1 sur 4</span>
+			<div class="flex flex-col gap-10 items-center">
+				<span>Scénario N°{data.question_id} sur 4</span>
 				<span>Question</span>
-				<div class="flex flex-col gap-5">
+				<div class="flex flex-col gap-5 w-full">
 					<button type="button" class="btn variant-ghost">Réponse 1</button>
 					<button type="button" class="btn variant-ghost">Réponse 2</button>
 					<button type="button" class="btn variant-ghost">Réponse 3</button>
 					<button type="button" class="btn variant-ghost">Réponse 4</button>
 				</div>
-				<button type="button" class="btn variant-filled">Continuer</button>
+				<div class="flex gap-5 w-full">
+					<button type="button" class="btn variant-filled">Continuer</button>
+					<button on:click={() => (isIntro = true)} type="button" class="btn variant-filled-surface"
+						>Retour</button
+					>
+				</div>
 			</div>
 		</div>
 	{/if}
