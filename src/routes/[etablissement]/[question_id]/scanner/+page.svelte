@@ -6,12 +6,11 @@
 
 	let errorText: string;
 
-	const pattern: RegExp = /https:\/\/workshop-i1-production\.up\.railway\.app\/(\w+)\/(\w+)/;
+	const pattern: RegExp = /https:\/\/\w+\.\w+\.railway\.app\/(\w+)\/(\d+)/;
 
 	function handleCode(event: { detail: { code: string } }) {
 		const code = event.detail.code;
-		alert(code)
-		checkCorrectUrl(event.detail.code);
+		checkCorrectUrl(code);
 	}
 
 	const checkCorrectUrl = (codeUrl: string) => {
@@ -19,10 +18,15 @@
 
 		if (match) {
 			const etablissement: string = match[1];
-			const question_number: string = match[2];
+			const question: number = parseInt(match[2], 10);
 
 			if (etablissement !== data.etablissement) {
 				errorText = 'Etablissement non correcte';
+				alert('mauvais etablissement');
+			}
+
+			if (question != data.question_id) {
+				alert('question not next');
 			}
 		}
 	};
