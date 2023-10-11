@@ -14,13 +14,11 @@
 	{#if isIntro}
 		<div class="content-container">
 			<div class="flex flex-col gap-10 items-center">
-				<span>Scénario N°{data.question}</span>
+				<span>Scénario N°{data.question.number}</span>
 				<span>Titre</span>
 				<div class="card p-4">
 					<p>
-						Lorem ipsum dolor sit amet consectetur. Amet nec malesuada mi suspendisse sapien
-						elementum vulputate. Vel auctor nulla nulla magna nisl sem non egestas. Nunc ac dui est
-						ornare. Vitae mi eleifend morbi vitae nulla pharetra.
+						{data.question.question_text}
 					</p>
 				</div>
 				<button on:click={() => (isIntro = false)} type="button" class="btn variant-filled"
@@ -31,7 +29,7 @@
 	{:else}
 		<div in:slide={{ duration: 300, axis: 'x' }} class="content-container">
 			<div class="flex flex-col gap-10 items-center">
-				<span>Scénario N°{data.question_id} sur 4</span>
+				<span>Scénario N°{data.question.number} sur 4</span>
 				<span>Question</span>
 				<div class="flex flex-col gap-5 w-full">
 					<button type="button" class="btn variant-ghost">Réponse 1</button>

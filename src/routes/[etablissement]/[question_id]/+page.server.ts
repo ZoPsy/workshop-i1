@@ -9,15 +9,15 @@ export const load = (async ({ locals, params }) => {
 
 	console.log(establishment, question_number)
 
-	const question = await sql`
+	const questions = await sql`
 		SELECT
-		question_text, explanation
+		question_text, explanation, number
 		FROM questions
 		WHERE number = ${question_number}
 		AND establishment_id = (SELECT establishment_id FROM establishment WHERE name = ${establishment} )
     `;
 
-	console.log(question)
+	const question = questions[0]
 
 	return {
 		question
