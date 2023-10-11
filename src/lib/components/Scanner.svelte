@@ -47,8 +47,8 @@
 	export let indice: string;
 </script>
 
-<main class="h-screen w-screen">
-	<reader class="flex h-screen w-screen" id="reader" />
+<main class="h-[100svh] w-[100svw]">
+	<reader class="flex h-full w-full" id="reader" />
 	{#if scanning}
 		<button class="absolute bottom-8 left-8 btn variant-filled-error font-semibold" on:click={stop}>Stop</button>
 	{:else}
