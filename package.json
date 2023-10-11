@@ -46,7 +46,8 @@
   "type": "module",
   "dependencies": {
     "@floating-ui/dom": "1.5.3",
+    "html5-qrcode": "^2.3.8",
     "postgres": "^3.3.5",
-    "html5-qrcode": "^2.3.8"
+    "unique-username-generator": "^1.2.0"
   }
 }
