@@ -1,12 +1,17 @@
-import { fail } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from './$types';
+import { redirect } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
-export const load = (async ({ locals, params }) => {
-	console.log(params.etablissement);
+export const load = (async ({ locals, params, parent }) => {
+	const { username } = await parent();
+
 
 	const sql = locals.sql;
 	const establishment = params.etablissement;
 	const question_number = params.question_id
+
+	if (!username) {
+		throw redirect(301, `/${establishment}`)
+	}
 
 	console.log(establishment, question_number)
 
@@ -24,8 +29,6 @@ export const load = (async ({ locals, params }) => {
 		SELECT * FROM answer
 		WHERE question_id = ${question.question_id}
 	`;
-
-
 
 	return {
 		question,
