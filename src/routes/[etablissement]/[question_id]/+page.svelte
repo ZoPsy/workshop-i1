@@ -14,7 +14,7 @@
 	{#if isIntro}
 		<div class="content-container">
 			<div class="flex flex-col gap-10 items-center">
-				<span>Scénario N°{data.question[}</span>
+				<span>Scénario N°{data.question}</span>
 				<span>Titre</span>
 				<div class="card p-4">
 					<p>
