@@ -1,9 +1,17 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import type { PageData } from './$types';
+	import { goto } from '$app/navigation';
 
-	const scenario = 1;
 	let isIntro = true;
+
+	let isAnswerCorrect = false;
+
+	$: {
+		if (isAnswerCorrect == true) {
+			goto(`${data.question.number}/scanner`);
+		}
+	}
 
 	//export let data: PageData;
 	let data: PageData;
@@ -14,13 +22,10 @@
 	{#if isIntro}
 		<div class="content-container">
 			<div class="flex flex-col gap-10 items-center">
-				<span>Scénario N°{data.question_id} sur 4</span>
-				<span>Titre</span>
+				<span>Scénario N°{data.question.number}</span>
 				<div class="card p-4">
 					<p>
-						Lorem ipsum dolor sit amet consectetur. Amet nec malesuada mi suspendisse sapien
-						elementum vulputate. Vel auctor nulla nulla magna nisl sem non egestas. Nunc ac dui est
-						ornare. Vitae mi eleifend morbi vitae nulla pharetra.
+						{data.question.explanation}
 					</p>
 				</div>
 				<button on:click={() => (isIntro = false)} type="button" class="btn variant-filled"
@@ -31,13 +36,18 @@
 	{:else}
 		<div in:slide={{ duration: 300, axis: 'x' }} class="content-container">
 			<div class="flex flex-col gap-10 items-center">
-				<span>Scénario N°{data.question_id} sur 4</span>
-				<span>Question</span>
+				<span>Scénario N°{data.question.number}</span>
+				<span>{data.question.explanation}</span>
 				<div class="flex flex-col gap-5 w-full">
-					<button type="button" class="btn variant-ghost">Réponse 1</button>
-					<button type="button" class="btn variant-ghost">Réponse 2</button>
-					<button type="button" class="btn variant-ghost">Réponse 3</button>
-					<button type="button" class="btn variant-ghost">Réponse 4</button>
+					{#each data.answers as answer}
+						<button
+							type="button"
+							class="btn variant-ghost"
+							on:click={() => {
+								isAnswerCorrect = answer.is_correct;
+							}}>{answer.answer_text}</button
+						>
+					{/each}
 				</div>
 				<div class="flex gap-5 w-full">
 					<button type="button" class="btn variant-filled">Continuer</button>
