@@ -9,7 +9,7 @@
 
 	$: {
 		if (isAnswerCorrect == true) {
-			goto("scanner")
+			goto(`${data.question.number}/scanner`);
 		}
 	}
 
