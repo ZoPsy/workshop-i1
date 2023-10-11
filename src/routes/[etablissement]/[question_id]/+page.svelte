@@ -5,17 +5,17 @@
 
 	let isIntro = true;
 
-	let isAnswerCorrect = false;
-
-	$: {
-		if (isAnswerCorrect == true) {
-			goto(`${data.question.number}/scanner`);
-		}
-	}
+	let isFinished = false;
 
 	//export let data: PageData;
 	let data: PageData;
-	export { isIntro, data };
+
+	let isClicked: boolean[] = [];
+	data.answers.forEach(() => {
+		isClicked.push(false);
+	});
+
+	export { isIntro, data, isClicked };
 </script>
 
 <div class="main-container">
@@ -39,18 +39,29 @@
 				<span>Scénario N°{data.question.number}</span>
 				<span>{data.question.explanation}</span>
 				<div class="flex flex-col gap-5 w-full">
-					{#each data.answers as answer}
+					{#each data.answers as answer, index}
 						<button
 							type="button"
-							class="btn variant-ghost"
-							on:click={() => {
-								isAnswerCorrect = answer.is_correct;
+							class="btn {!isClicked[index]
+								? 'variant-ghost'
+								: answer.is_correct
+								? 'variant-filled-success'
+								: 'variant-filled-error'}"
+							on:click={(evt) => {
+								if (answer.is_correct) {
+									isFinished = true;
+								}
+								isClicked[index] = true;
 							}}>{answer.answer_text}</button
 						>
 					{/each}
 				</div>
 				<div class="flex gap-5 w-full">
-					<button type="button" class="btn variant-filled">Continuer</button>
+					<button
+						type="button"
+						class="btn variant-filled {isFinished ? 'opacity-100' : 'opacity-50'}"
+						on:click={() => isFinished && goto(`${data.question.number}/scanner`)}>Continuer</button
+					>
 					<button on:click={() => (isIntro = true)} type="button" class="btn variant-filled-surface"
 						>Retour</button
 					>
