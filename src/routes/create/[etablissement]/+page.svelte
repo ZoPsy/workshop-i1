@@ -9,7 +9,7 @@
 		base_url = pageData.url.origin;
 	});
 
-    let qrCodes: = []
+    let qrCodes = []
 </script>
 
 <div class="container">
