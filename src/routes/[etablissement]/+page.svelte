@@ -3,6 +3,7 @@
 	import type { ActionData, PageData } from './$types';
 	import { generateFromEmail, generateUsername } from 'unique-username-generator';
 	import { cubicOut } from 'svelte/easing';
+	import { goto } from '$app/navigation';
 
 	const username = generateUsername('-');
 
@@ -63,11 +64,16 @@
 					</div>
 				</label>
 			</form>
-			<a href="/{data.etablissement.name}/1" type="button" class="btn variant-filled">Démarrer</a>
-			<a href="/{data.etablissement.name}/leaderboard" type="button" class="btn variant-ghost">
+			<button on:click={() => goto(`/${data.etablissement.name}/1`)} class="btn variant-filled"
+				>Démarrer</button
+			>
+			<button
+				on:click={() => goto(`/${data.etablissement.name}/leaderboard`)}
+				class="btn variant-ghost"
+			>
 				<span><img src="/assets/stats.svg" alt="graphique" /></span>
 				<span>Leaderboard</span>
-			</a>
+			</button>
 		</div>
 	</div>
 </div>
