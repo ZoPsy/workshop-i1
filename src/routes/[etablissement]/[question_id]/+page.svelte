@@ -28,7 +28,7 @@
 		<div in:slide={{ duration: 300, axis: 'x' }} class="content-container">
 			<div class="flex flex-col gap-10 items-center">
 				<span>Scénario N°{data.question.number} sur 4</span>
-				<span>Question</span>
+				<span>{data.question.explanation}</span>
 				<div class="flex flex-col gap-5 w-full">
 					{#each data.answers as answer}
 						<button type="button" class="btn variant-ghost">{answer.answer_text}</button>
