@@ -31,7 +31,7 @@
 				<span>Question</span>
 				<div class="flex flex-col gap-5 w-full">
 					{#each data.answers as answer}
-						<button type="button" class="btn variant-ghost">{answer}</button>
+						<button type="button" class="btn variant-ghost">{answer.answer_text}</button>
 					{/each}
 				</div>
 				<div class="flex gap-5 w-full">
