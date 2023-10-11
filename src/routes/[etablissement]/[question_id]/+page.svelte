@@ -2,7 +2,6 @@
 	import { slide } from 'svelte/transition';
 	import type { PageData } from './$types';
 
-	const scenario = 1;
 	let isIntro = true;
 
 	//export let data: PageData;
@@ -15,10 +14,9 @@
 		<div class="content-container">
 			<div class="flex flex-col gap-10 items-center">
 				<span>Scénario N°{data.question.number}</span>
-				<span>Titre</span>
 				<div class="card p-4">
 					<p>
-						{data.question.question_text}
+						{data.question.explanation}
 					</p>
 				</div>
 				<button on:click={() => (isIntro = false)} type="button" class="btn variant-filled"
@@ -32,10 +30,9 @@
 				<span>Scénario N°{data.question.number} sur 4</span>
 				<span>Question</span>
 				<div class="flex flex-col gap-5 w-full">
-					<button type="button" class="btn variant-ghost">Réponse 1</button>
-					<button type="button" class="btn variant-ghost">Réponse 2</button>
-					<button type="button" class="btn variant-ghost">Réponse 3</button>
-					<button type="button" class="btn variant-ghost">Réponse 4</button>
+					{#each data.answers as answer}
+						<button type="button" class="btn variant-ghost">{answer}</button>
+					{/each}
 				</div>
 				<div class="flex gap-5 w-full">
 					<button type="button" class="btn variant-filled">Continuer</button>

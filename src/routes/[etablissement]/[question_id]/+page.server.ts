@@ -11,7 +11,7 @@ export const load = (async ({ locals, params }) => {
 
 	const questions = await sql`
 		SELECT
-		question_text, explanation, number
+		*
 		FROM questions
 		WHERE number = ${question_number}
 		AND establishment_id = (SELECT establishment_id FROM establishment WHERE name = ${establishment} )
@@ -19,7 +19,15 @@ export const load = (async ({ locals, params }) => {
 
 	const question = questions[0]
 
+	const answers = await sql`
+		SELECT * FROM answer
+		WHERE question_id = ${question.question_id}
+	`;
+
+
+
 	return {
-		question
+		question,
+		answers
 	};
 }) satisfies PageServerLoad;
