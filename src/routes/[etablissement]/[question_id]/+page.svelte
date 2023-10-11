@@ -1,8 +1,17 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import type { PageData } from './$types';
+	import { goto } from '$app/navigation';
 
 	let isIntro = true;
+
+	let isAnswerCorrect = false;
+
+	$: {
+		if (isAnswerCorrect == true) {
+			goto("scanner")
+		}
+	}
 
 	//export let data: PageData;
 	let data: PageData;
@@ -31,7 +40,13 @@
 				<span>{data.question.explanation}</span>
 				<div class="flex flex-col gap-5 w-full">
 					{#each data.answers as answer}
-						<button type="button" class="btn variant-ghost">{answer.answer_text}</button>
+						<button
+							type="button"
+							class="btn variant-ghost"
+							on:click={() => {
+								isAnswerCorrect = answer.is_correct;
+							}}>{answer.answer_text}</button
+						>
 					{/each}
 				</div>
 				<div class="flex gap-5 w-full">
