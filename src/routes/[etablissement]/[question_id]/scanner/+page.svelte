@@ -23,7 +23,11 @@
 		const question: number = parseInt(lastTwoItems[1], 10);
 
 		if (etablissement !== data.etablissement) {
-			errorText = 'Etablissement non correcte';
+			toastStore.trigger({
+				message: 'Etablissement non correct',
+				background: 'variant-filled-error'
+			});
+			errorText = 'Etablissement non correct';
 			return;
 		}
 
