@@ -36,6 +36,6 @@
 	//<div class="absolute bottom-2">{errorText}</div>
 </script>
 
-<div class="h-screen w-screen relative">
+<div class="h-[100svh] w-[100svw] relative">
 	<Scanner indice={"Retrouve le QR Code derrière le tabouret"} on:code={handleCode} />
 </div>
