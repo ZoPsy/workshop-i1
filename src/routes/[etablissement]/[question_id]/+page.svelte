@@ -6,6 +6,7 @@
 	let isIntro = true;
 
 	let isFinished = false;
+	let score = 4;
 
 	//export let data: PageData;
 	let data: PageData;
@@ -15,7 +16,7 @@
 		isClicked.push(false);
 	});
 
-	export { isIntro, data, isClicked };
+	export { isIntro, data, isClicked, score };
 </script>
 
 <div class="main-container">
@@ -51,17 +52,26 @@
 								if (answer.is_correct) {
 									isFinished = true;
 								}
+								if (!isClicked[index] && !answer.is_correct) {
+									score--;
+								}
 								isClicked[index] = true;
 							}}>{answer.answer_text}</button
 						>
 					{/each}
 				</div>
 				<div class="flex gap-5 w-full">
-					<button
-						type="button"
-						class="btn variant-filled {isFinished ? 'opacity-100' : 'opacity-50'}"
-						on:click={() => isFinished && goto(`${data.question.number}/scanner`)}>Continuer</button
-					>
+					<form action="?/submit" method="POST">
+						<input class="hidden" type="text" id="username" name="username" value="{data.username}" />
+						<button
+							type="submit"
+							id="btn"
+							name="btn"
+							value="{score}"
+							class="btn variant-filled {isFinished ? 'opacity-100' : 'opacity-50 pointer-events-none'}"
+							>Continuer</button
+						>
+					</form>
 					<button on:click={() => (isIntro = true)} type="button" class="btn variant-filled-surface"
 						>Retour</button
 					>
