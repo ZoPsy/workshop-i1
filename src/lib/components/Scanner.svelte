@@ -37,34 +37,31 @@
 		console.log(decodedResult);
 		dispatch('code', {
 			code: decodedText
-		})
+		});
 	}
 
 	function onScanFailure(error: any) {
 		console.warn(`Code scan error = ${error}`);
 	}
+
+	export let indice: string;
 </script>
 
-<main>
-	<reader id="reader" />
+<main class="h-[100svh] w-[100svw]">
+	<reader class="flex h-full w-full" id="reader" />
 	{#if scanning}
-		<button on:click={stop}>stop</button>
+		<button class="absolute bottom-8 left-8 btn variant-filled-error font-semibold" on:click={stop}>Stop</button>
 	{:else}
-		<button on:click={start}>start</button>
+		<button class="absolute bottom-8 left-8 btn variant-filled-success font-semibold" on:click={start}>Start</button>
 	{/if}
+	<div class="absolute top-8 left-8 right-8 card p-3 flex flex-col justify-center items-center">
+		<span>💡Indice</span>
+		<span class="font-semibold">{indice}</span>
+	</div>
 </main>
 
 <style>
-	main {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 20px;
-	}
-	reader {
-		width: 100%;
-		min-height: 500px;
-		background-color: black;
+	#reader > video {
+		height: 100svh;
 	}
 </style>
