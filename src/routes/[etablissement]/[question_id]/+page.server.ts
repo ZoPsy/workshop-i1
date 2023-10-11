@@ -8,11 +8,11 @@ export const load = (async ({ locals, params }) => {
 
 	const question = await sql`
 		SELECT
-		question_text, explanation, enigme
+		question_text, explanation
 		FROM questions
-		WHERE establishment id = (SELECT establishment_id FROM establishment WHERE name = ${etablissementExpected} );
+		WHERE establishment_id = (SELECT establishment_id FROM establishment WHERE name = ${etablissementExpected} );
     `;
-	
+
 	console.log(question)
 
 	return {
