@@ -1,0 +1,7 @@
+.main-container {
+	@apply container h-screen flex justify-center items-center mx-auto;
+}
+
+.content-container {
+    @apply flex flex-col justify-around h-full w-full max-w-screen-sm px-8;
+}
