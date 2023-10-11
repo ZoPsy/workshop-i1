@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Scanner from '$lib/components/Scanner.svelte';
-
 	const etablissement = '1';
 
 	export { etablissement };

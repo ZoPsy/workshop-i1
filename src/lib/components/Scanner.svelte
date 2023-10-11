@@ -20,7 +20,8 @@
 			{ facingMode: 'environment' },
 			{
 				fps: 60,
-				qrbox: { width: 250, height: 250 }
+				qrbox: { width: 250, height: 250 },
+				disableFlip: true
 			},
 			onScanSuccess,
 			onScanFailure
@@ -38,6 +39,7 @@
 		dispatch('code', {
 			code: decodedText
 		});
+		stop();
 	}
 
 	function onScanFailure(error: any) {
@@ -50,9 +52,14 @@
 <main class="h-[100svh] w-[100svw]">
 	<reader class="flex h-full w-full" id="reader" />
 	{#if scanning}
-		<button class="absolute bottom-8 left-8 btn variant-filled-error font-semibold" on:click={stop}>Stop</button>
+		<button class="absolute bottom-8 left-8 btn variant-filled-error font-semibold" on:click={stop}
+			>Stop</button
+		>
 	{:else}
-		<button class="absolute bottom-8 left-8 btn variant-filled-success font-semibold" on:click={start}>Start</button>
+		<button
+			class="absolute bottom-8 left-8 btn variant-filled-success font-semibold"
+			on:click={start}>Start</button
+		>
 	{/if}
 	<div class="absolute top-8 left-8 right-8 card p-3 flex flex-col justify-center items-center">
 		<span>💡Indice</span>
