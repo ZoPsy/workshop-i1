@@ -5,18 +5,19 @@ export const load = (async ({ locals, params }) => {
 
 	const sql = locals.sql;
 	const etablissementExpected = params.etablissement;
+	const question_number = params.question_id
 
 	const question = await sql`
 		SELECT
 		question_text, explanation
 		FROM questions
-		WHERE establishment_id = (SELECT establishment_id FROM establishment WHERE name = ${etablissementExpected} );
+		WHERE number = ${question_number}
+		AND establishment_id = (SELECT establishment_id FROM establishment WHERE name = ${etablissementExpected} )
     `;
 
 	console.log(question)
 
 	return {
-		etablissement: params.etablissement,
-		question_id: params.question_id
+		question
 	};
 }) satisfies PageServerLoad;
