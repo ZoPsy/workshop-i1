@@ -4,13 +4,19 @@
 
 	//export let data: PageData;
 
-	const sourceData = [
+	let data: PageData;
+
+	/* const sourceData = [
 		{ position: 1, name: 'Hydrogen', score: 1 },
 		{ position: 2, name: 'Helium', score: 4 },
 		{ position: 3, name: 'Lithium', score: 6 },
 		{ position: 4, name: 'Beryllium', score: 9 },
 		{ position: 5, name: 'Boron', score: 10 }
-	];
+	]; */
+
+	const sourceData = data.sourceData.map((user, index: number) => {
+		return { position: index + 1, name: user.name, score: user.score ? user.score : '0' };
+	});
 
 	const tableSimple: TableSource = {
 		// A list of heading labels.
@@ -21,8 +27,6 @@
 		meta: tableMapperValues(sourceData, ['position', 'name', 'score'])
 		// Optional: A list of footer labels.
 	};
-
-	let data: PageData;
 
 	export { tableSimple, Table, data };
 </script>
