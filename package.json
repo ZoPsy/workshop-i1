@@ -45,7 +45,9 @@
   },
   "type": "module",
   "dependencies": {
+    "@castlenine/svelte-qrcode": "^1.1.0",
     "@floating-ui/dom": "1.5.3",
+    "html2pdf-ts": "^1.1.1",
     "html5-qrcode": "^2.3.8",
     "postgres": "^3.3.5",
     "unique-username-generator": "^1.2.0"
