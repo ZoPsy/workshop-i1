@@ -20,7 +20,9 @@
 		const lastTwoItems: string[] = parts.slice(-2);
 
 		const etablissement: string = lastTwoItems[0];
+		console.log('etablissement : ', etablissement);
 		const question: number = parseInt(lastTwoItems[1], 10);
+		console.log('question : ', question);
 
 		if (etablissement !== data.etablissement) {
 			toastStore.trigger({
@@ -31,7 +33,9 @@
 			return;
 		}
 
-		if (question != data.question_id) {
+		console.log(data.question_id);
+
+		if (question != data.question_id + 1) {
 			toastStore.trigger({
 				message: "Ce n'est pas le bon QR Code",
 				background: 'variant-filled-error'
