@@ -43,15 +43,21 @@
 	function onScanFailure(error: any) {
 		console.warn(`Code scan error = ${error}`);
 	}
+
+	export let indice: string;
 </script>
 
 <main class="h-screen w-screen">
 	<reader class="flex h-screen w-screen" id="reader" />
 	{#if scanning}
-		<button class="absolute bottom-8 left-8" on:click={stop}>stop</button>
+		<button class="absolute bottom-8 left-8 btn variant-filled-error font-semibold" on:click={stop}>Stop</button>
 	{:else}
-		<button class="absolute bottom-8 left-8" on:click={start}>start</button>
+		<button class="absolute bottom-8 left-8 btn variant-filled-success font-semibold" on:click={start}>Start</button>
 	{/if}
+	<div class="absolute top-8 left-8 right-8 card p-3 flex flex-col justify-center items-center">
+		<span>💡Indice</span>
+		<span class="font-semibold">{indice}</span>
+	</div>
 </main>
 
 <style>

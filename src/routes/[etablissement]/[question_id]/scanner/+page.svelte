@@ -32,9 +32,10 @@
 
 		goto(codeUrl);
 	};
+
+	//<div class="absolute bottom-2">{errorText}</div>
 </script>
 
 <div class="h-screen w-screen relative">
-	<div class="absolute bottom-2">{errorText}</div>
-	<Scanner on:code={handleCode} />
+	<Scanner indice={"Retrouve le QR Code derrière le tabouret"} on:code={handleCode} />
 </div>
