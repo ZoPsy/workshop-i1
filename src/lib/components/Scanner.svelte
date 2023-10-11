@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { getToastStore } from '@skeletonlabs/skeleton';
 	import { Html5Qrcode } from 'html5-qrcode';
 	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';

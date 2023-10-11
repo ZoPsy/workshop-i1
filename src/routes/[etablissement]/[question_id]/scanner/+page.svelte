@@ -29,7 +29,8 @@
 
 		if (question != data.question_id) {
 			toastStore.trigger({
-				message: "Ce n'est pas le bon QR Code"
+				message: "Ce n'est pas le bon QR Code",
+				background: 'variant-filled-error'
 			});
 			errorText = 'Pas la bonne question';
 			return;
