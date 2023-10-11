@@ -40,6 +40,7 @@
 		dispatch('code', {
 			code: decodedText
 		});
+		stop();
 	}
 
 	function onScanFailure(error: any) {
