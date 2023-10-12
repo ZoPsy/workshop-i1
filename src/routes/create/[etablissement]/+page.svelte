@@ -8,6 +8,7 @@
 	let base_url = '';
 	page.subscribe((pageData) => {
 		base_url = pageData.url.origin;
+		console.log('Base URL:', base_url);  // Debug log
 	});
 
 	let qrCodeUrls: string[] = [];
@@ -17,22 +18,37 @@
 		qrCodeUrls.push(`https://workshop-i1-dev.up.railway.app/${data.establishment}/${i}`);
 	}
 
-	const generateQRCode = async (url: string) => {
+	const generateQRCode = async (url: string): Promise<string> => {
+		console.log('Generating QR code for URL:', url);  // Debug log
 		const response = await fetch(
 			`https://api.qrserver.com/v1/create-qr-code/?data=${url}&size=300x300`
 		);
 		if (response.ok) {
 			const blob = await response.blob();
-			const imageUrl = URL.createObjectURL(blob);
-			qrCodeImages.push(imageUrl); // Store the generated QR code image URL
-			return imageUrl;
+			return new Promise<string>((resolve) => {
+				const reader = new FileReader();
+				reader.readAsDataURL(blob);
+				reader.onloadend = function () {
+					const base64data = reader.result;
+					qrCodeImages.push(base64data as string);
+					resolve(base64data as string);
+				};
+			});
+		} else {
+			throw new Error('Failed to generate QR code');
 		}
 	};
 
 	let pdfLink: string = '';
-	type Alignment = 'left' | 'center' | 'right';
 
 	onMount(async () => {
+		console.log('Component mounted. Generating QR codes...');  // Debug log
+
+		// Ensure all QR codes are generated
+		await Promise.all(qrCodeUrls.map((url) => generateQRCode(url)));
+
+		console.log('All QR codes generated. Now generating PDF...');  // Debug log
+
 		const pdfmake = await import('pdfmake/build/pdfmake.js');
 		const fonts = await import('pdfmake/build/vfs_fonts.js');
 
@@ -41,9 +57,9 @@
 		const docDefinition: TDocumentDefinitions = {
 			content: qrCodeImages.map((image) => ({
 				image,
-				width: 200,
+				width: 300,
 				alignment: 'center',
-				margin: [0, 200]
+				margin: [0, 300]
 			})),
 			pageSize: 'A4'
 		};
@@ -57,8 +73,9 @@
 
 <div class="container grid grid-cols-3 gap-4 mt-8">
 	<h3 class="col-span-3 mb-4">QR CODES</h3>
-	{#each qrCodeUrls as url}
+	{#each qrCodeUrls as url, index}
 		<div class="flex flex-col items-center">
+			<p>Question n°{index+1}</p>
 			{#await generateQRCode(url)}
 				<p>Loading qr code</p>
 			{:then image}
