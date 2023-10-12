@@ -65,7 +65,7 @@ VALUES (
            'Cette situation est-elle un mythe ou une réalité ?',
            'Si quelqu''un est réellement victime de harcèlement sexuel au travail, il le signalera immédiatement',
            'Dans un coin de l''entreprise, discrète et petite, Je sers l''énergie, je réveille les âmes endormies. L''eau chaude coule, le parfum du café embaume, Mais dans les couloirs, parfois, règne un autre royaume. Des regards de trop près, des mots de travers, Dans ces moments d''insouciance naissent parfois des revers. Mon lieu est sûr, mais dans l''ombre parfois se glisse, Ce qu''on ne devrait pas tolérer, ce qui fait mal, ce qui blesse. Où suis-je donc, cet endroit souvent animé, Où règne la convivialité, mais où peut se cacher la réalité ?',
-           3,
+           3
        );
 INSERT INTO questions (
     question_text,
@@ -77,7 +77,7 @@ VALUES (
            'Ce comportement correspond à :',
            'Il y a deux semaines, Sarah a été confrontée à des commentaires inappropriés de la part de son manager. Lundi dernier, ces remarques sur son apparence ont persisté, et aujourd''hui encore, il a fait des commentaires déplacés.',
            '',
-           4,
+           4
        );
 INSERT INTO establishment_question (establishment_id, question_id)
 VALUES (1, 1),
