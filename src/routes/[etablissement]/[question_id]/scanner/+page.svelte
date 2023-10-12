@@ -5,6 +5,8 @@
 	import { getToastStore } from '@skeletonlabs/skeleton';
 	export let data: PageData;
 
+	console.log("data : ",data.indice)
+
 	const toastStore = getToastStore();
 
 	let errorText: string;
@@ -51,5 +53,5 @@
 </script>
 
 <div class="h-[100svh] w-[100svw] relative">
-	<Scanner indice={'Retrouve le QR Code derrière le tabouret'} on:code={handleCode} />
+	<Scanner indice={data.indice.enigme} on:code={handleCode} />
 </div>
