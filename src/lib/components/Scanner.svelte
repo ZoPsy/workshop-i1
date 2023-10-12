@@ -52,7 +52,7 @@
 <main class="h-[100svh] w-[100svw]">
 	<reader class="flex h-full w-full" id="reader" />
 	{#if scanning}
-		<button class="absolute bottom-8 left-8 right-8 btn variant-filled-error font-semibold" on:click={stop}
+		<button class="absolute bottom-8 left-8 right-8 lg:left-60 lg:right-60 btn variant-filled-error font-semibold" on:click={stop}
 			>Stop</button
 		>
 	{:else}
