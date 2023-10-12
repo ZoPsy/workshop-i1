@@ -82,7 +82,7 @@ VALUES (
 INSERT INTO answer (answer_text, is_correct, question_id)
 VALUES (
         'Agissement sexiste',
-        true,
+        false,
         (
             select question_id
             from questions
@@ -92,7 +92,7 @@ VALUES (
 INSERT INTO answer (answer_text, is_correct, question_id)
 VALUES (
         'Agression sexuelle',
-        false,
+        true,
         (
             select question_id
             from questions
