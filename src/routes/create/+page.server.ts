@@ -23,17 +23,32 @@ export const actions: Actions = {
         console.log("Checking if establishment exists:", exists); // Debug log
 
         if (exists.length > 0) {
-            console.log("Establishment already exists. Returning 409."); // Debug log
             return fail(409, { name, exists: true });
         }
 
-        const insert = await sql`
-            INSERT INTO establishment
-            (name)
-            VALUES (${name})    
+        const result = await sql`
+            INSERT INTO establishment (name)
+            VALUES (${name})
+            RETURNING establishment_id;
         `;
 
-        console.log("Inserting new establishment:", insert); // Debug log
+        const insertedEstablishmentId = result[0].establishment_id;
+
+
+        console.table(result);
+
+        const questions = await sql`
+            SELECT question_id FROM questions;
+        `;
+
+        questions.forEach(async (question: { question_id: number }) => {
+            await sql`
+                INSERT INTO establishment_question
+                    (establishment_id,question_id)
+                VALUES (${insertedEstablishmentId}, ${question.question_id})
+            `;
+        });
+
 
         throw redirect(301, `/create/${name}`)
     }
