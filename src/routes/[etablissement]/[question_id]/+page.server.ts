@@ -73,7 +73,7 @@ export const actions = {
 				throw redirect(301, `${question_id}/scanner`);
 			}
 		} else {
-			throw fail(404);
+			return fail(404);
 		}
 	}
 };
