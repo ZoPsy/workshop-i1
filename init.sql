@@ -59,7 +59,7 @@ INSERT INTO questions (
     question_text,
     explanation,
     enigme,
-    number,
+    number
 )
 VALUES (
            'Cette situation est-elle un mythe ou une réalité ?',
@@ -71,7 +71,7 @@ INSERT INTO questions (
     question_text,
     explanation,
     enigme,
-    number,
+    number
 )
 VALUES (
            'Ce comportement correspond à :',
