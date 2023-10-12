@@ -30,7 +30,7 @@ export const actions: Actions = {
 
 		const username = data.get('username')?.toString();
 		if (username === null || username === undefined) {
-			throw fail(400);
+			return fail(400);
 		}
 
 		let valid = false;
@@ -50,7 +50,7 @@ export const actions: Actions = {
 				valid = true;
 			} else {
 				console.log(`Username ${username} already exists. Retrying...`);
-				throw fail(400);
+				return fail(400);
 			}
 		}
 
