@@ -71,25 +71,27 @@
 	});
 </script>
 
-<div class="container grid grid-cols-3 gap-4 mt-8">
-	<h3 class="col-span-3 mb-4">QR CODES</h3>
-	{#each qrCodeUrls as url, index}
-		<div class="flex flex-col items-center">
-			<p>Question n°{index+1}</p>
-			{#await generateQRCode(url)}
-				<p>Loading qr code</p>
-			{:then image}
-				<img src={image} alt="url" class="w-32 h-32 mb-2" />
-				<a href={image} download class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-					>Download</a
-				>
-			{/await}
+<div class="main-container">
+	<div class="content-container">
+		<h3 class="h2 mb-4">QR CODES</h3>
+		<div class="flex flex-row justify-center items-center flex-wrap gap-4">
+			{#each qrCodeUrls as url, index}
+				<div class="flex flex-col items-center bg-gray-300 rounded-3xl p-4 space-y-4">
+					<p class="text-black">Question n°{index+1}</p>
+					{#await generateQRCode(url)}
+						<p>Loading qr code</p>
+					{:then image}
+						<img src={image} alt="url" class="w-32 h-32 mb-2 rounded-md" />
+						<a href={image} download class="btn variant-filled mt-2">Download</a>
+					{/await}
+				</div>
+			{/each}
 		</div>
-	{/each}
-	<!-- Button to download the entire PDF -->
-	<a
-		href={pdfLink}
-		download="QRCodes.pdf"
-		class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Download All as PDF</a
-	>
+		<!-- Button to download the entire PDF -->
+		<a
+			href={pdfLink}
+			download="QRCodes.pdf"
+			class="btn variant-filled mt-4">Download All as PDF</a
+		>
+	</div>
 </div>

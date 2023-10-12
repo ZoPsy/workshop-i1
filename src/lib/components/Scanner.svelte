@@ -52,16 +52,16 @@
 <main class="h-[100svh] w-[100svw]">
 	<reader class="flex h-full w-full" id="reader" />
 	{#if scanning}
-		<button class="absolute bottom-8 left-8 right-8 btn variant-filled-error font-semibold" on:click={stop}
+		<button class="absolute bottom-8 left-8 right-8 lg:left-60 lg:right-60 btn variant-filled-error font-semibold" on:click={stop}
 			>Stop</button
 		>
 	{:else}
-		<div class="absolute top-8 left-8 right-8 bottom-30 card p-3 flex flex-col items-center">
+		<div class="absolute top-8 left-8 right-8 lg:left-60 lg:right-60 bottom-30 card p-3 flex flex-col items-center">
 			<span class="text-xl font-bold">💡Indice</span>
 			<span class="mt-1">{indice}</span>
 		</div>
 		<button
-			class="absolute bottom-8 left-8 right-8 btn variant-filled-success font-semibold"
+			class="absolute bottom-8 left-8 right-8 lg:left-60 lg:right-60 btn variant-filled-success font-semibold"
 			on:click={start}>Start</button
 		>
 	{/if}
