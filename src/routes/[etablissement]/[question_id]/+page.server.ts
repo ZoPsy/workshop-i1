@@ -29,7 +29,7 @@ export const load = (async ({ locals, params, parent }) => {
 	console.log(question);
 	if (question === undefined || question === null) {
 		console.log('yep');
-		throw redirect(301, `${establishment}/end`);
+		throw redirect(301, `end`);
 	}
 
 	const answers = await sql`
