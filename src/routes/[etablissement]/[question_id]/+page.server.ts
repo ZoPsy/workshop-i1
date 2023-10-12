@@ -24,7 +24,7 @@ export const load = (async ({ locals, params, parent }) => {
         AND e.name = ${establishment}
     `;
 
-	const question = questions[0].enigme;
+	const question = questions[0];
 
 	console.log(question);
 	if (question === undefined || question === null) {
