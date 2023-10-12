@@ -14,9 +14,11 @@
 		{ position: 5, name: 'Boron', score: 10 }
 	]; */
 
-	const sourceData = data.sourceData.map((user, index: number) => {
-		return { position: index + 1, name: user.name, score: user.score ? user.score : '0' };
-	});
+	const sourceData = data.sourceData
+		.filter((user) => user.score !== null)
+		.map((user, index: number) => {
+			return { position: index + 1, name: user.name, score: user.score ? user.score : '0' };
+		});
 
 	const tableSimple: TableSource = {
 		// A list of heading labels.
