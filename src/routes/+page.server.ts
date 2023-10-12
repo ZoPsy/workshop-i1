@@ -8,7 +8,7 @@ export const actions = {
 		if (name !== null && name !== '') {
 			throw redirect(303, '/' + name);
 		} else {
-			throw fail(404);
+			return fail(404);
 		}
 	}
 };
