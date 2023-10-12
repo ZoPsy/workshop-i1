@@ -79,9 +79,6 @@ VALUES (
            '',
            4
        );
-INSERT INTO establishment_question (establishment_id, question_id)
-VALUES (1, 1),
-    (1, 2);
 INSERT INTO answer (answer_text, is_correct, question_id)
 VALUES (
         'Agissement sexiste',
@@ -222,3 +219,8 @@ VALUES (
                where explanation = 'Il y a deux semaines, Sarah a été confrontée à des commentaires inappropriés de la part de son manager. Lundi dernier, ces remarques sur son apparence ont persisté, et aujourd''hui encore, il a fait des commentaires déplacés.'
            )
        );
+INSERT INTO establishment_question (establishment_id, question_id)
+VALUES (1, 1),
+    (1, 2),
+    (1, 3),
+    (1, 4);
