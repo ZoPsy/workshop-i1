@@ -25,6 +25,7 @@
     "@tailwindcss/forms": "0.5.6",
     "@tailwindcss/typography": "0.5.10",
     "@types/node": "20.8.4",
+    "@types/pdfmake": "^0.2.5",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "autoprefixer": "10.4.16",
@@ -45,8 +46,11 @@
   },
   "type": "module",
   "dependencies": {
+    "@castlenine/svelte-qrcode": "^1.1.0",
     "@floating-ui/dom": "1.5.3",
+    "html2pdf-ts": "^1.1.1",
     "html5-qrcode": "^2.3.8",
+    "pdfmake": "^0.2.7",
     "postgres": "^3.3.5",
     "unique-username-generator": "^1.2.0"
   }

@@ -1,69 +1,68 @@
-import { error, type Actions } from '@sveltejs/kit';
+import { error, type Actions, fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { generateUsername } from "unique-username-generator";
+import { redirect } from '@sveltejs/kit';
 
 export const load = (async ({ locals, params }) => {
+	const sql = locals.sql;
+	const etablissementExpected = params.etablissement;
 
-    const sql = locals.sql;
-    const etablissementExpected = params.etablissement;
-
-    const etablissements = await sql`
+	const etablissements = await sql`
         SELECT
         name
         FROM establishment
         WHERE name = ${etablissementExpected}
     `;
 
-    if (!etablissements || etablissements.length === 0) {
-        throw error(404, 'Etablissement not found');
-    }
+	if (!etablissements || etablissements.length === 0) {
+		throw error(404, 'Etablissement not found');
+	}
 
-    const etablissement = etablissements[0]
+	const etablissement = etablissements[0];
 
-    return { etablissement };
+	return { etablissement };
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
-    checkUser: async ({ locals, params, cookies }) => {
-        const sql = locals.sql;
-        const establishment_name = params.etablissement;
+	checkUser: async ({ locals, params, cookies, request }) => {
+		const data = await request.formData();
+		const sql = locals.sql;
+		const establishment_name = params.etablissement;
 
-        console.log(`Checking user for establishment: ${establishment_name}`);
+		const username = data.get('username')?.toString();
+		if (username === null || username === undefined) {
+			throw fail(400);
+		}
 
-        let generatedUsername: string = "";
-        let valid = false;
+		let valid = false;
 
-        while (!valid) {
-            generatedUsername = generateUsername("-");
-            console.log(`Generated username: ${generatedUsername}`);
+		while (!valid) {
+			console.log('username : ', username);
 
-            const dbUsers = await sql`
+			const dbUsers = await sql`
                 SELECT
                 name
                 FROM player
-                WHERE name = ${generatedUsername}
+                WHERE name = ${username}
                 AND establishment_id = (SELECT establishment_id FROM establishment WHERE name = ${establishment_name} )
             `;
 
-            if (dbUsers.length === 0) {
-                console.log(`Username ${generatedUsername} is valid.`);
-                valid = true;
-            } else {
-                console.log(`Username ${generatedUsername} already exists. Retrying...`);
-            }
-        }
+			if (dbUsers.length === 0) {
+				valid = true;
+			} else {
+				console.log(`Username ${username} already exists. Retrying...`);
+				throw fail(400);
+			}
+		}
 
-        // Insert the valid username into the database
-        console.log(`Inserting username ${generatedUsername} into the database.`);
-        await sql`
+		// Insert the valid username into the database
+		console.log(`Inserting username ${username} into the database.`);
+		await sql`
             INSERT INTO player (name, establishment_id)
-            VALUES (${generatedUsername}, (SELECT establishment_id FROM establishment WHERE name = ${establishment_name} ))
+            VALUES (${username}, (SELECT establishment_id FROM establishment WHERE name = ${establishment_name} ))
         `;
 
-        console.log(`Username ${generatedUsername} successfully inserted into the database.`);
+		cookies.set('username', username);
 
-        cookies.set("username", generatedUsername)
-
-        return { username: generatedUsername }
-    }
+		throw redirect(301, `/${establishment_name}/1`);
+	}
 };

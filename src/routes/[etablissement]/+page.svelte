@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { tweened } from 'svelte/motion';
 	import type { ActionData, PageData } from './$types';
-	import { generateFromEmail, generateUsername } from 'unique-username-generator';
+	import { generateUsername } from 'unique-username-generator';
 	import { cubicOut } from 'svelte/easing';
+	import { goto } from '$app/navigation';
 
-	const username = generateUsername('-');
+	//const username = generateUsername('-');
 
 	let data: PageData;
 	export let form: ActionData;
@@ -17,6 +18,11 @@
 			spin = false;
 			rotation.set(0);
 		});
+		const input: HTMLInputElement | null = document.querySelector('#username');
+		if (input !== null) {
+			const newUsername = generateUsername('-');
+			input.value = newUsername;
+		}
 	}
 
 	export { data };
@@ -26,19 +32,21 @@
 	<div class="content-container">
 		<h1 class="h2 uppercase">{data.etablissement.name}</h1>
 		<div class="flex flex-col gap-5">
-			<form method="POST" action="?/checkUser">
+			<form id="userForm" method="POST" action="?/checkUser">
 				<label class="label">
 					<span>Pseudonyme (unique)</span>
 					<div class="flex flex-row space-x-2">
 						<input
 							class="input w-11/12"
 							title="Username"
+							id="username"
+							name="username"
 							type="text"
 							placeholder="John Doe"
-							value={form?.username ?? ''}
+							value={''}
 						/>
 						<button
-							type="submit"
+							type="button"
 							on:click={() => {
 								spin = true;
 							}}
@@ -62,12 +70,19 @@
 						</button>
 					</div>
 				</label>
+				<button
+					type="submit"
+					on:click={() => goto(`/${data.etablissement.name}/1`)}
+					class="btn variant-filled w-full mt-5">Démarrer</button
+				>
 			</form>
-			<a href="/{data.etablissement.name}/1" type="button" class="btn variant-filled">Démarrer</a>
-			<a href="/{data.etablissement.name}/leaderboard" type="button" class="btn variant-ghost">
+			<button
+				on:click={() => goto(`/${data.etablissement.name}/leaderboard`)}
+				class="btn variant-ghost"
+			>
 				<span><img src="/assets/stats.svg" alt="graphique" /></span>
 				<span>Leaderboard</span>
-			</a>
+			</button>
 		</div>
 	</div>
 </div>
