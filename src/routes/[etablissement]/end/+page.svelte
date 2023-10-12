@@ -8,7 +8,10 @@
 
 <div class="main-container">
 	<div class="content-container">
-		<div class="card p-3 text-center"><h1 class="h2 text-2xl">Bravo tu as terminé ta formation 🎉</h1></div> 
+		<div class="card p-3 text-center">
+			<h1 class="h2 text-2xl">Bravo tu as terminé ta formation 🎉</h1>
+			<span>Score : {data.score}</span>
+		</div>
 		<div class="flex flex-col gap-5">
 			<a href="/{data.etablissement}" type="button" class="btn variant-filled"
 				>Revenir sur la page principale</a
