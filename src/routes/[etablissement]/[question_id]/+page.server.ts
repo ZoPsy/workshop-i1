@@ -60,9 +60,10 @@ export const actions = {
 			console.log('dbUser : ', dbUser);
 			console.log('dbUser : ', dbUser[0].name);
 			if (dbUser) {
+				const newscore = dbUser[0].score + parseInt(btn.toString());
+				console.log('newscore : ', newscore);
 				await sql`
-            UPDATE player SET score = ${parseInt(dbUser[0].score) + parseInt(btn.toString())
-					} WHERE name = ${username}
+            UPDATE player SET score = ${newscore} WHERE name = ${username}
         `;
 				throw redirect(301, `${question_id}/scanner`);
 			}
