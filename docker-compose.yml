@@ -8,6 +8,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
+      - db-data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
@@ -19,6 +20,8 @@ services:
       PGADMIN_DEFAULT_PASSWORD: adminpassword
     ports:
       - "80:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
     depends_on:
       - postgres
     networks:
@@ -26,3 +29,7 @@ services:
 
 networks:
   app-network:
+
+volumes:
+  db-data:
+  pgadmin-data:

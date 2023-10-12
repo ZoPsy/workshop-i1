@@ -28,14 +28,11 @@ export const actions: Actions = {
         const sql = locals.sql;
         const establishment_name = params.etablissement;
 
-        console.log(`Checking user for establishment: ${establishment_name}`);
-
         let generatedUsername: string = "";
         let valid = false;
 
         while (!valid) {
             generatedUsername = generateUsername("-");
-            console.log(`Generated username: ${generatedUsername}`);
 
             const dbUsers = await sql`
                 SELECT
@@ -46,10 +43,7 @@ export const actions: Actions = {
             `;
 
             if (dbUsers.length === 0) {
-                console.log(`Username ${generatedUsername} is valid.`);
                 valid = true;
-            } else {
-                console.log(`Username ${generatedUsername} already exists. Retrying...`);
             }
         }
 
@@ -59,8 +53,6 @@ export const actions: Actions = {
             INSERT INTO player (name, establishment_id)
             VALUES (${generatedUsername}, (SELECT establishment_id FROM establishment WHERE name = ${establishment_name} ))
         `;
-
-        console.log(`Username ${generatedUsername} successfully inserted into the database.`);
 
         cookies.set("username", generatedUsername)
 

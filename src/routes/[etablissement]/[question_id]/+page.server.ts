@@ -15,25 +15,28 @@ export const load = (async ({ locals, params, parent }) => {
 	console.log(establishment, question_number);
 
 	const questions = await sql`
-		SELECT
-		*
-		FROM questions
-		WHERE number = ${question_number}
-		AND establishment_id = (SELECT establishment_id FROM establishment WHERE name = ${establishment} )
+        SELECT
+            q.*
+        FROM questions q
+        JOIN establishment_question eq ON q.question_id = eq.question_id
+        JOIN establishment e ON e.establishment_id = eq.establishment_id
+        WHERE q.number = ${question_number}
+        AND e.name = ${establishment}
     `;
 
 	const question = questions[0];
 
 	const answers = await sql`
-		SELECT * FROM answer
-		WHERE question_id = ${question.question_id}
-	`;
+        SELECT * FROM answer
+        WHERE question_id = ${question.question_id}
+    `;
 
 	return {
 		question,
 		answers
 	};
 }) satisfies PageServerLoad;
+
 
 export const actions = {
 	submit: async ({ locals, request, params }) => {
