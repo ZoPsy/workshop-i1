@@ -26,6 +26,12 @@ export const load = (async ({ locals, params, parent }) => {
 
 	const question = questions[0];
 
+	console.log(question);
+	if (question === undefined || question === null) {
+		console.log('yep');
+		throw redirect(301, `end`);
+	}
+
 	const answers = await sql`
         SELECT * FROM answer
         WHERE question_id = ${question.question_id}
@@ -36,7 +42,6 @@ export const load = (async ({ locals, params, parent }) => {
 		answers
 	};
 }) satisfies PageServerLoad;
-
 
 export const actions = {
 	submit: async ({ locals, request, params }) => {
